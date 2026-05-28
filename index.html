@@ -6,157 +6,196 @@
 <title>PS_PRUEBAS - Proyecto de Pruebas de Software</title>
 
 <style>
-:root{
-    --bg:#f5f7fb;
-    --primary:#2d3a4b;
-    --accent:#4f8cff;
-    --green:#2ecc71;
-    --card:#ffffff;
-    --shadow:0 10px 30px rgba(0,0,0,0.08);
-    --radius:16px;
+:root {
+    --bg: #f4f6fa;
+    --primary: #1f2a44;
+    --secondary: #4f8cff;
+    --accent: #22c55e;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+body {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
     background: var(--bg);
-    color:#222;
+    color: var(--text);
+    line-height: 1.6;
 }
 
 /* HEADER */
-header{
-    background: linear-gradient(135deg, #2d3a4b, #4f8cff);
-    color:white;
-    text-align:center;
-    padding:60px 20px;
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
     box-shadow: var(--shadow);
 }
 
-header h1{
-    font-size:2.6rem;
-    letter-spacing:1px;
+header h1 {
+    font-size: 2.8rem;
+    letter-spacing: 1px;
 }
 
-header p{
-    margin-top:10px;
-    opacity:.9;
+header p {
+    opacity: 0.9;
+    margin-top: 10px;
+    font-size: 1.1rem;
 }
 
 /* CONTAINER */
-.container{
-    max-width:950px;
-    margin:40px auto;
-    padding:0 15px;
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 16px;
 }
 
 /* SECTIONS */
-section{
-    background:var(--card);
-    padding:28px;
-    margin-bottom:22px;
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    transition:.25s ease;
+section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: 0.25s ease;
 }
 
-section:hover{
-    transform:translateY(-3px);
+section:hover {
+    transform: translateY(-3px);
 }
 
 /* TITLES */
-h2{
-    color:var(--primary);
-    margin-bottom:12px;
-    border-left:5px solid var(--accent);
-    padding-left:10px;
+h2 {
+    color: var(--primary);
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    border-left: 5px solid var(--secondary);
+    padding-left: 10px;
 }
 
-h3{
-    margin-top:18px;
-    color:var(--accent);
+h3 {
+    color: var(--secondary);
+    margin-top: 16px;
+    margin-bottom: 10px;
 }
 
 /* CARD */
-.card{
-    background:#f8fbff;
-    padding:16px;
-    border-radius:12px;
-    margin-top:12px;
-    border-left:4px solid var(--accent);
+.card {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 12px;
+    border-left: 4px solid var(--secondary);
 }
 
 /* LISTS */
-ul{
-    margin-left:20px;
-    line-height:1.8;
+ul {
+    margin-left: 20px;
 }
 
-li{
-    margin-bottom:6px;
+li {
+    margin-bottom: 6px;
 }
 
 /* BADGES */
-.badge{
-    display:inline-block;
-    background:var(--accent);
-    color:white;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:12px;
-    margin:4px;
+.badge {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-right: 6px;
+    margin-top: 6px;
 }
 
-/* WHY BOX */
-.why-section{
-    background: linear-gradient(135deg, #eef6ff, #e8f7f0);
-    padding:16px;
-    margin-top:12px;
-    border-radius:12px;
+/* WHY SECTION */
+.why-section {
+    background: linear-gradient(135deg, #eef6ff, #f0fdf4);
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.why-section h4 {
+    color: var(--primary);
+    margin-bottom: 6px;
 }
 
 /* OBJECTIVE */
-.objective-box{
-    background: #f0fff4;
-    border-left:5px solid var(--green);
-    padding:16px;
-    margin-top:15px;
-    border-radius:12px;
+.objective-box {
+    background: #ecfdf5;
+    border-left: 5px solid var(--accent);
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 12px;
 }
 
 /* CHECK */
-.check{
-    color:var(--green);
-    font-weight:bold;
+.check {
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 6px;
 }
 
-/* LINK */
-a{
-    color:var(--accent);
-    text-decoration:none;
+/* LINKS */
+a {
+    color: var(--secondary);
+    text-decoration: none;
 }
 
-a:hover{
-    text-decoration:underline;
+a:hover {
+    text-decoration: underline;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* TECH BOX */
+.tech-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.tech-box h4 {
+    color: var(--secondary);
 }
 
 /* FOOTER */
-footer{
-    text-align:center;
-    padding:25px;
-    background:#1f2a36;
-    color:white;
-    margin-top:40px;
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #0f172a;
+    color: white;
+    margin-top: 40px;
 }
 
 /* RESPONSIVE */
-@media(max-width:600px){
-    header h1{font-size:1.8rem;}
-    section{padding:18px;}
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 18px;
+    }
 }
 </style>
 
@@ -171,37 +210,113 @@ footer{
 
 <div class="container">
 
-    <!-- TODO TU CONTENIDO SIGUE IGUAL -->
-    <!-- NO LO BORRÉ PARA RESPETAR TU TRABAJO -->
+<section>
+    <h2>Integrantes del equipo</h2>
+    <div class="card">
+        <ul>
+            <li>Anthony Cahuib</li>
+            <li>Jael</li>
+            <li>Mario</li>
+            <li>Compañero 4</li>
+        </ul>
+    </div>
+</section>
 
-    <section>
-        <h2>Integrantes del equipo</h2>
-        <div class="card">
-            <ul>
-                <li>Anthony Cahuib</li>
-                <li>Jael</li>
-                <li>Mario</li>
-                <li>Compañero 4</li>
-            </ul>
+<section>
+    <h2>Introducción</h2>
+    <div class="card">
+        <p>
+            Este proyecto forma parte de la iniciativa de garantizar la <strong>calidad y confiabilidad</strong> del software mediante pruebas exhaustivas. Nuestro grupo se enfoca específicamente en el desarrollo y ejecución de <strong>estrategias de testing avanzadas</strong> para validar el comportamiento, rendimiento y robustez de la aplicación Baby Buddy.
+        </p>
+
+        <div class="objective-box">
+            <strong>🎯 Objetivo principal:</strong>
+            Implementar un conjunto completo de pruebas automatizadas utilizando herramientas modernas de testing.
         </div>
-    </section>
+    </div>
+</section>
 
-    <section>
-        <h2>Introducción</h2>
-        <div class="card">
-            <p>
-                Este proyecto forma parte de la iniciativa de garantizar la <strong>calidad y confiabilidad</strong> del software mediante pruebas exhaustivas.
-            </p>
+<section>
+    <h2>🍼 Baby Buddy</h2>
+
+    <h3>¿Qué es?</h3>
+    <div class="card">
+        <p>
+            Baby Buddy es una aplicación web para el seguimiento del cuidado de bebés.
+        </p>
+    </div>
+
+    <h3>Características</h3>
+    <ul>
+        <li>Registro de alimentación</li>
+        <li>Monitoreo de sueño</li>
+        <li>Gestión de pañales</li>
+        <li>Seguimiento del crecimiento</li>
+    </ul>
+</section>
+
+<section>
+    <h2>✨ ¿Por qué Baby Buddy?</h2>
+
+    <div class="why-section">
+        <h4>Complejidad funcional</h4>
+        <p>Permite aplicar testing avanzado.</p>
+    </div>
+
+    <div class="why-section">
+        <h4>Stack tecnológico</h4>
+        <p>Python + Django ideal para pruebas.</p>
+    </div>
+
+    <div class="why-section">
+        <h4>Impacto real</h4>
+        <p>Sistema crítico de cuidado infantil.</p>
+    </div>
+
+    <div class="why-section">
+        <h4>Puntos de prueba</h4>
+        <p>API, UI y lógica de negocio.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Tecnología y testing</h2>
+    <div class="grid">
+        <div class="tech-box">
+            <h4>Pytest</h4>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- (el resto de tu contenido sigue igual, no lo recorto aquí para que lo pegues directo) -->
+<section>
+    <h2>Alcance del testing</h2>
+    <div class="card">
+        <span class="check">✔</span> Pruebas unitarias con Pytest
+    </div>
+</section>
+
+<section>
+    <h2>Metodología</h2>
+    <ul>
+        <li>Análisis</li>
+        <li>Implementación</li>
+        <li>Ejecución</li>
+        <li>Reporte</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Repositorio</h2>
+    <div class="card">
+        <a href="https://github.com/acahuib/PS_PRUEBAS">GitHub Repository</a>
+    </div>
+</section>
 
 </div>
 
 <footer>
-    <p><strong>PS_PRUEBAS</strong> - Proyecto de Pruebas de Software</p>
-    <p>© 2026 - Grupo de Software Testing</p>
+    <p><strong>PS_PRUEBAS</strong></p>
+    <p>Proyecto de Pruebas de Software - 2026</p>
 </footer>
 
 </body>
