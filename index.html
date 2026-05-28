@@ -5,204 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PS_PRUEBAS - Proyecto de Pruebas de Software</title>
 
+<!-- Fuente más profesional -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root {
-    --main-bg: #f4f7fb;
-    --primary: #1f2a44;
-    --secondary: #3b82f6;
-    --accent: #22c55e;
-    --card-bg: #ffffff;
-    --border-radius: 18px;
-    --shadow: 0 10px 30px rgba(0,0,0,0.10);
-    --text: #1e293b;
-}
+    :root {
+        --main-bg: #f4f6f9;
+        --primary: #1f2a44;
+        --secondary: #2563eb;
+        --accent: #22c55e;
+        --card-bg: #ffffff;
+        --border-radius: 16px;
+        --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        --text: #1f2937;
+    }
 
-html, body {
-    height: 100%;
-}
+    html, body {
+        height: 100%;
+        font-family: 'Inter', Arial, sans-serif;
+        background: var(--main-bg);
+        color: var(--text);
+        margin: 0;
+    }
 
-body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--main-bg);
-    color: var(--text);
-    margin: 0;
-    min-height: 100vh;
-}
+    header {
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        color: white;
+        text-align: center;
+        padding: 60px 20px 40px;
+        box-shadow: var(--shadow);
+    }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #fff;
-    padding: 60px 20px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
+    /* LOGO */
+    .logo {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid white;
+        margin-bottom: 15px;
+        background: white;
+    }
 
-header h1 {
-    font-size: 2.8em;
-    letter-spacing: 1px;
-    font-weight: 700;
-}
-
-header p {
-    font-size: 1.2em;
-    opacity: 0.9;
-}
-
-/* CONTAINER */
-.container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 18px;
-}
-
-/* SECTIONS */
-section {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 28px;
-    padding: 34px 30px;
-    transition: 0.25s ease;
-}
-
-section:hover {
-    transform: translateY(-3px);
-}
-
-/* TITLES */
-h2 {
-    color: var(--primary);
-    font-size: 1.6em;
-    margin-bottom: 16px;
-    border-left: 5px solid var(--secondary);
-    padding-left: 10px;
-}
-
-h3 {
-    color: var(--secondary);
-    font-size: 1.1em;
-    margin-top: 20px;
-}
-
-/* CARD */
-.card {
-    background: #f8fafc;
-    padding: 18px 22px;
-    border-radius: 12px;
-    margin-top: 14px;
-    border-left: 4px solid var(--secondary);
-}
-
-/* LISTS */
-ul, ol {
-    margin-left: 26px;
-    margin-top: 10px;
-}
-
-li {
-    margin-bottom: 8px;
-    line-height: 1.6;
-}
-
-/* BADGE */
-.badge {
-    display: inline-block;
-    background: var(--secondary);
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 999px;
-    font-size: 0.85em;
-    margin-right: 6px;
-}
-
-/* WHY SECTION */
-.why-section {
-    background: linear-gradient(135deg, #eef6ff, #f0fdf4);
-    padding: 18px;
-    border-radius: 12px;
-    margin-top: 14px;
-    border: 1px solid #e5e7eb;
-}
-
-.why-section h4 {
-    color: var(--primary);
-    margin-bottom: 8px;
-}
-
-/* OBJECTIVE */
-.objective-box {
-    background: #ecfdf5;
-    border-left: 5px solid var(--accent);
-    padding: 18px;
-    border-radius: 12px;
-    margin-top: 14px;
-}
-
-/* CHECK */
-.check {
-    color: var(--accent);
-    font-weight: bold;
-}
-
-/* LINKS */
-a {
-    color: var(--secondary);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-    margin-top: 18px;
-}
-
-/* TECH BOX */
-.tech-box {
-    background: #f8fafc;
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    text-align: center;
-}
-
-.tech-box h4 {
-    color: var(--secondary);
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px;
-    background: #0f172a;
-    color: white;
-    margin-top: 40px;
-    border-top: 3px solid var(--secondary);
-}
-
-/* RESPONSIVE */
-@media (max-width: 700px) {
     header h1 {
-        font-size: 2em;
+        font-size: 2.5em;
+        margin: 0;
+        font-weight: 700;
+    }
+
+    header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-top: 8px;
+    }
+
+    .container {
+        max-width: 950px;
+        margin: 40px auto;
+        padding: 0 20px;
     }
 
     section {
-        padding: 20px;
+        background: var(--card-bg);
+        padding: 30px;
+        margin-bottom: 25px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        transition: transform 0.2s ease;
     }
-}
-</style>
 
+    section:hover {
+        transform: translateY(-2px);
+    }
+
+    h2 {
+        color: var(--primary);
+        border-left: 5px solid var(--secondary);
+        padding-left: 10px;
+        margin-bottom: 15px;
+    }
+
+    h3 {
+        color: var(--secondary);
+    }
+
+    .card {
+        background: #f8fafc;
+        padding: 15px;
+        border-left: 4px solid var(--secondary);
+        border-radius: 10px;
+    }
+
+    .badge {
+        background: var(--secondary);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        margin-right: 5px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+    }
+
+    .tech-box {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .why-section {
+        background: #f1f5f9;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .highlight {
+        background: #ecfdf5;
+        border-left: 4px solid var(--accent);
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        background: #111827;
+        color: white;
+        margin-top: 40px;
+    }
+
+</style>
 </head>
 
 <body>
 
 <header>
+    <!-- 🔵 LOGO DEL GRUPO (cambia la ruta de la imagen) -->
+    <img src="logo.png" alt="Logo Grupo Escarabajo" class="logo">
+
     <h1>🧪 PS_PRUEBAS</h1>
     <p>Proyecto de Pruebas de Software - Baby Buddy</p>
 </header>
@@ -223,95 +170,53 @@ footer {
 
     <section>
         <h2>Introducción</h2>
-        <div class="card">
-            <p>
-                Este proyecto forma parte de la iniciativa de garantizar la <strong>calidad y confiabilidad</strong> del software mediante pruebas exhaustivas. Nuestro grupo se enfoca específicamente en el desarrollo y ejecución de <strong>estrategias de testing avanzadas</strong> para validar el comportamiento, rendimiento y robustez de la aplicación Baby Buddy.
-            </p>
-
-            <div class="objective-box">
-                <strong>Objetivo principal:</strong>
-                Implementar un conjunto completo de pruebas automatizadas.
-            </div>
+        <p>
+            Este proyecto forma parte de la iniciativa de garantizar la <strong>calidad y confiabilidad</strong> del software mediante pruebas exhaustivas.
+        </p>
+        <div class="highlight">
+            <strong>Objetivo principal:</strong> Implementar pruebas automatizadas para asegurar la calidad del software.
         </div>
     </section>
 
     <section>
-        <h2>🍼 Producto de Software</h2>
+        <h2>🍼 Baby Buddy</h2>
         <div class="card">
-            <p>Baby Buddy es una aplicación web para el cuidado de bebés.</p>
+            <p>Aplicación web para gestionar actividades de bebés como alimentación, sueño y crecimiento.</p>
         </div>
+    </section>
 
-        <h3>Características</h3>
+    <section>
+        <h2>Características</h2>
         <ul>
-            <li>Alimentación</li>
-            <li>Sueño</li>
-            <li>Pañales</li>
-            <li>Crecimiento</li>
+            <li>Registro de alimentación</li>
+            <li>Monitoreo de sueño</li>
+            <li>Gestión de pañales</li>
+            <li>Seguimiento de crecimiento</li>
         </ul>
-    </section>
-
-    <section>
-        <h2>✨ ¿Por qué Baby Buddy?</h2>
-
-        <div class="why-section">
-            <h4>Complejidad funcional</h4>
-            <p>Permite testing avanzado.</p>
-        </div>
-
-        <div class="why-section">
-            <h4>Stack tecnológico</h4>
-            <p>Python + Django.</p>
-        </div>
-
-        <div class="why-section">
-            <h4>Impacto real</h4>
-            <p>Sistema crítico.</p>
-        </div>
-
-        <div class="why-section">
-            <h4>Puntos de prueba</h4>
-            <p>API, UI, lógica.</p>
-        </div>
     </section>
 
     <section>
         <h2>Tecnología</h2>
         <div class="grid">
             <div class="tech-box">
-                <h4>Pytest</h4>
+                <h3>Pytest</h3>
+                <p>Framework de testing en Python</p>
             </div>
         </div>
     </section>
 
     <section>
-        <h2>Alcance del testing</h2>
-        <div class="card">
-            <span class="check">✔</span> Pruebas unitarias con Pytest
-        </div>
-    </section>
-
-    <section>
-        <h2>Metodología</h2>
-        <ul>
-            <li>Análisis</li>
-            <li>Implementación</li>
-            <li>Ejecución</li>
-            <li>Reporte</li>
-        </ul>
-    </section>
-
-    <section>
         <h2>Repositorio</h2>
         <div class="card">
-            <a href="https://github.com/acahuib/PS_PRUEBAS">GitHub Repository</a>
+            <p>GitHub: <strong>PS_PRUEBAS</strong></p>
         </div>
     </section>
 
 </div>
 
 <footer>
-    <p><strong>PS_PRUEBAS</strong> - Proyecto de Pruebas de Software</p>
-    <p>© 2026</p>
+    <p><strong>PS_PRUEBAS</strong></p>
+    <p>Grupo Escarabajo © 2026</p>
 </footer>
 
 </body>
