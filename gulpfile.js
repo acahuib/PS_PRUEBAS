@@ -31,9 +31,10 @@ function _runInPipenv(command) {
   command = command.concat(process.argv.splice(3));
   return new Promise((resolve, reject) => {
     spawn("pipenv", command, { stdio: "inherit" }).on("exit", function (code) {
-      if (code) {
-        reject();
-      }
+        if (code) {
+          reject(new Error(`pipenv exited with code ${code}`));
+          return;
+        }
       resolve();
     });
   });
@@ -52,9 +53,10 @@ function _runInPipenv(command) {
 function _runCommand(program, command) {
   return new Promise((resolve, reject) => {
     spawn(program, command, { stdio: "inherit" }).on("exit", function (code) {
-      if (code) {
-        reject();
-      }
+        if (code) {
+          reject(new Error(`pipenv exited with code ${code}`));
+          return;
+        }
       resolve();
     });
   });
