@@ -13,6 +13,8 @@ class MockUserRequest:
 
 
 class TemplateTagsTestCase(TestCase):
+    # Verifica la renderización de iconos booleanos de Bootstrap.
+    # Valida que retorne el HTML correcto (clases de CSS) para valores True y False.
     def test_bootstrap_bool_icon(self):
         self.assertEqual(
             bootstrap.bool_icon(True),
@@ -51,6 +53,8 @@ class TemplateTagsTestCase(TestCase):
     #     self.assertEqual("", duration.child_age_string(None))
     #     self.assertEqual("", duration.child_age_string("not a date!!"))
 
+    # Verifica la conversión de un objeto timedelta a una cadena de duración legible.
+    # Valida formatos completos, formatos recortados ('m', 'h') y el manejo de excepciones TypeError.
     def test_duration_duration_string(self):
         delta = timezone.timedelta(hours=1, minutes=30, seconds=15)
         self.assertEqual(
@@ -62,24 +66,32 @@ class TemplateTagsTestCase(TestCase):
         self.assertEqual(duration.duration_string(""), "")
         self.assertRaises(TypeError, duration.duration_string("not a delta"))
 
+    # Verifica la extracción precisa de la cantidad de horas a partir de un timedelta.
+    # Valida el retorno en enteros y el manejo de errores de tipo.
     def test_duration_hours(self):
         delta = timezone.timedelta(hours=1)
         self.assertEqual(duration.hours(delta), 1)
         self.assertEqual(duration.hours(""), 0)
         self.assertRaises(TypeError, duration.hours("not a delta"))
 
+    # Verifica la extracción de la cantidad de minutos desde un objeto timedelta.
+    # Valida que devuelva los minutos exactos y que lance una excepción ante datos inválidos.
     def test_duration_minutes(self):
         delta = timezone.timedelta(minutes=45)
         self.assertEqual(duration.minutes(delta), 45)
         self.assertEqual(duration.minutes(""), 0)
         self.assertRaises(TypeError, duration.minutes("not a delta"))
 
+    # Verifica la extracción de segundos desde un objeto timedelta.
+    # Valida el cálculo numérico y la validación de excepciones al enviar cadenas de texto.
     def test_duration_seconds(self):
         delta = timezone.timedelta(seconds=20)
         self.assertEqual(duration.seconds(delta), 20)
         self.assertEqual(duration.seconds(""), 0)
         self.assertRaises(TypeError, duration.seconds("not a delta"))
 
+    # Verifica el cálculo descriptivo de los días transcurridos respecto a una fecha límite.
+    # Valida múltiples escenarios devolviendo textos como "today", "yesterday" o "X days ago".
     def test_duration_dayssince(self):
         # test with a few different dates that could be pathological
         dates = [
@@ -111,6 +123,8 @@ class TemplateTagsTestCase(TestCase):
                 "60 days ago",
             )
 
+    # Verifica el cálculo exacto del tiempo transcurrido entre dos objetos datetime.
+    # Valida que la diferencia generada corresponda al timedelta esperado en varios escenarios.
     def test_duration_deltasince(self):
         datetimes = [
             (
@@ -131,6 +145,8 @@ class TemplateTagsTestCase(TestCase):
             with self.subTest():
                 self.assertEqual(duration.deltasince(d, now), expected_delta)
 
+    # [PRUEBA DE INTEGRACIÓN]
+    # No es unitaria porque inserta objetos Child y Timer en la Base de Datos.
     def test_instance_add_url(self):
         child = Child.objects.create(
             first_name="Test", last_name="Child", birth_date=timezone.localdate()
@@ -147,6 +163,8 @@ class TemplateTagsTestCase(TestCase):
             url, "/sleep/add/?timer={}&child={}".format(timer.id, child.slug)
         )
 
+    # Verifica el formateo de fechas hacia representaciones de texto más cortas.
+    # Valida el uso de "Today" para la fecha actual y formatos de "mes corto" para previas.
     def test_datetime_short(self):
         date = timezone.localtime()
         self.assertEqual(
