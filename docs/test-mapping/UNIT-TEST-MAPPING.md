@@ -254,10 +254,60 @@ El motivo probable es la dependencia de fechas calculadas respecto al momento ac
 El archivo constituye la principal fuente de cobertura unitaria encontrada durante el análisis realizado hasta esta etapa.
 
 
-**Unitarias puras:**
-
+**Unitarias puras:** 7
 
 ---
 
-**Integración ligera:**
+**Integración ligera:** 2
+
+
+## 8. Archivo: `tests_utils.py`
+
+### 8.1. Resultado del análisis
+
+Se realizó la revisión de las pruebas automatizadas contenidas en el archivo `tests_utils.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
+
+El análisis determinó que todas las pruebas presentes en este módulo cumplen con los criterios establecidos para ser clasificadas como pruebas unitarias puras. Las funciones evaluadas son invocadas directamente, sin dependencia de vistas, formularios, cliente HTTP, ORM o base de datos.
+
+Debido a su nivel de aislamiento y enfoque en funciones específicas, este archivo representa el conjunto de pruebas unitarias de mayor calidad identificado durante el análisis realizado hasta el momento.
+
+### 8.2. Justificación de la clasificación
+
+Las pruebas identificadas presentan las siguientes características:
+
+* Invocan funciones auxiliares directamente.
+* No utilizan infraestructura web.
+* No realizan operaciones de persistencia.
+* No dependen de modelos o componentes del ORM.
+* Evalúan lógica de transformación, cálculo y validación de datos de forma aislada.
+
+Estas características permiten verificar el comportamiento de cada unidad funcional sin interferencia de componentes externos.
+
+### 8.3. Clasificación identificada
+
+| Tipo de prueba                | Cantidad | Observaciones                                                                 |
+| ----------------------------- | -------- | ----------------------------------------------------------------------------- |
+| Pruebas unitarias puras       | 4        | Todas las pruebas del archivo cumplen los criterios de aislamiento definidos. |
+| Pruebas de integración ligera | 0        | No se identificaron dependencias con infraestructura externa.                 |
+
+### 8.4 Pruebas unitarias identificadas
+
+| Método | Clase | Tipo | Estado | Qué verifica | Datos de entrada | Resultado esperado | Resultado obtenido | Tipo de aserción |
+|---|---|---|---|---|---|---|---|---|
+| `test_duration_string` | `UtilsTestCase` | Unitaria pura | PASS | `duration_string()` formatea un `timedelta` con distintas precisiones y lanza `TypeError` ante entrada inválida | `timedelta(h=1, m=30, s=45)` con precisiones por defecto, `"m"`, `"h"` y `"1 hour"` como inválido | `"1 hour, 30 minutes, 45 seconds"`, `"1 hour, 30 minutes"`, `"1 hour"`, `TypeError` | Coincide con esperado | `assertEqual` x3, `assertRaises` con `lambda` |
+| `test_duration_parts` | `UtilsTestCase` | Unitaria pura | PASS | `duration_parts()` descompone un `timedelta` en tupla `(h, m, s)` y lanza `TypeError` ante entrada inválida | `timedelta(h=1, m=30, s=45)`, `"1 hour"` como inválido | `(1, 30, 45)`, `TypeError` | Coincide con esperado | `assertEqual`, `assertRaises` con `lambda` |
+| `test_random_color` | `UtilsTestCase` | Unitaria pura | PASS | `random_color()` devuelve un string perteneciente a `utils.COLORS` | Ninguno — función sin parámetros | Instancia de `str` contenida en `utils.COLORS` | Coincide con esperado | `assertIsInstance`, `assertIn` |
+| `test_timezone_aware_duration` | `UtilsTestCase` | Unitaria pura | PASS | `timezone_aware_duration()` calcula correctamente la diferencia entre dos `datetime` con zonas horarias distintas | `start = 2024-10-26 20:30 +01:00`, `end = 2024-10-27 08:30 +00:00` | `timedelta(hours=13)` | Coincide con esperado | `assertEqual` |
+
+### 8.5. Observaciones
+
+Las pruebas `test_duration_string` y `test_duration_parts` verifican adecuadamente la generación de excepciones ante entradas inválidas mediante el uso de una función diferida (`lambda`) dentro de `assertRaises`.
+
+La prueba `test_timezone_aware_duration` constituye uno de los casos más relevantes del módulo, ya que verifica explícitamente el comportamiento de la función ante fechas pertenecientes a distintas zonas horarias.
+
+La utilización de fechas con desplazamientos UTC definidos permite construir una prueba determinista y reproducible, capaz de detectar errores que habitualmente no son cubiertos mediante pruebas basadas en la fecha y hora actual del sistema.
+
+### 8.6.  Resultado
+
+**Se identificaron 4 pruebas unitarias puras que cumplen los criterios de inclusión definidos para el presente inventario.**
 
