@@ -311,3 +311,64 @@ La utilización de fechas con desplazamientos UTC definidos permite construir un
 
 **Se identificaron 4 pruebas unitarias puras que cumplen los criterios de inclusión definidos para el presente inventario.**
 
+## 9. Archivo: `tests_views.py`
+
+### 9.1. Resultado del análisis
+
+Se realizó la revisión de las pruebas automatizadas contenidas en el archivo `tests_views.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
+
+Tras el análisis de su implementación y comportamiento, se determinó que el archivo no contiene pruebas unitarias puras. Todas las pruebas identificadas ejercitan la capa web de la aplicación mediante solicitudes HTTP reales, interactuando con múltiples componentes del sistema de forma simultánea.
+
+En consecuencia, ninguna de las pruebas definidas en este archivo forma parte del alcance del presente inventario de pruebas unitarias.
+
+### 9.2. Justificación de la clasificación
+
+Las pruebas analizadas presentan características propias de las pruebas de integración completas:
+
+* Utilizan un cliente HTTP real para ejecutar solicitudes GET y POST.
+* Interactúan con vistas, modelos, formularios, middleware y sistema de rutas.
+* Ejecutan migraciones durante la fase de preparación del entorno de prueba.
+* Utilizan datos persistidos en la base de datos de prueba.
+* Verifican el comportamiento observable de la aplicación a través de respuestas HTTP.
+
+Asimismo, el método `setUpClass()` ejecuta comandos de inicialización que generan datos de prueba para toda la suite, introduciendo dependencias compartidas entre los distintos casos de prueba.
+
+Debido a estas características, las pruebas no aíslan unidades individuales de código y deben clasificarse como pruebas de integración.
+
+### 9.3. Clasificación identificada
+
+| Tipo de prueba                   | Cantidad | Observaciones                                                                 |
+| -------------------------------- | -------- | ----------------------------------------------------------------------------- |
+| Pruebas de integración completas | 16       | Validan el funcionamiento de vistas y rutas mediante solicitudes HTTP reales. |
+| Pruebas unitarias puras          | 0        | No se identificaron pruebas aisladas de infraestructura.                      |
+| Pruebas cercanas a unitarias     | 0        | No se identificaron pruebas con aislamiento parcial significativo.            |
+
+### 9.4. Cobertura funcional observada
+
+Las pruebas del módulo cubren las principales vistas asociadas a las entidades gestionadas por la aplicación.
+
+| Prueba                         | Funcionalidad validada                                                      |
+| ------------------------------ | --------------------------------------------------------------------------- |
+| `test_bmi_views`               | Vistas relacionadas con registros BMI.                                      |
+| `test_child_views`             | Vistas relacionadas con gestión de hijos.                                   |
+| `test_diaperchange_views`      | Vistas relacionadas con cambios de pañal.                                   |
+| `test_feeding_views`           | Vistas relacionadas con alimentación.                                       |
+| `test_headcircumference_views` | Vistas relacionadas con perímetro cefálico.                                 |
+| `test_height_views`            | Vistas relacionadas con talla.                                              |
+| `test_note_views`              | Vistas relacionadas con notas.                                              |
+| `test_pumping_views`           | Vistas relacionadas con extracción de leche.                                |
+| `test_sleep_views`             | Vistas relacionadas con sueño.                                              |
+| `test_tags_views`              | Vistas relacionadas con etiquetas.                                          |
+| `test_temperature_views`       | Vistas relacionadas con temperatura.                                        |
+| `test_medication_views`        | Vistas relacionadas con medicación.                                         |
+| `test_timer_views`             | Vistas relacionadas con temporizadores.                                     |
+| `test_timeline_views`          | Comportamiento de la línea temporal según la cantidad de hijos registrados. |
+| `test_tummytime_views`         | Vistas relacionadas con tiempo boca abajo (*tummy time*).                   |
+| `test_weight_views`            | Vistas relacionadas con peso.                                               |
+
+
+### 9.5. Resultado
+
+**Archivo excluido del inventario de pruebas unitarias.**
+
+Las 16 pruebas identificadas fueron clasificadas como pruebas de integración completas debido a su dependencia de la infraestructura web, la base de datos y los mecanismos de inicialización de datos utilizados por la aplicación.
