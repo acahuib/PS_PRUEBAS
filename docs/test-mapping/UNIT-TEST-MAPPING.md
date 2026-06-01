@@ -2,12 +2,19 @@
 
 ## 1. Objetivo
 
-Este documento identifica y clasifica las pruebas unitarias existentes en el proyecto Baby Buddy. Su propósito es proporcionar una línea base para actividades de auditoría, análisis de cobertura y mejora de calidad.
+Este documento identifica y clasifica las pruebas unitarias existentes en el proyecto Baby Buddy. Su propósito es proporcionar una línea base para actividades de auditoría, análisis de cobertura y mejora de calidad. Se incluyen únicamente pruebas unitarias automatizadas. No se consideran pruebas de integración, funcionales, de interfaz de usuario ni pruebas manuales.
 
-## 2. Alcance
+## 2. Resumen de Identificación de Pruebas Unitarias
 
-Se incluyen únicamente pruebas unitarias automatizadas. No se consideran pruebas de integración, funcionales, de interfaz de usuario ni pruebas manuales.
-
+| Archivo                  | Total de pruebas analizadas | Unitarias puras | Otras pruebas identificadas                                              | Resultado |
+| ------------------------ | --------------------------: | --------------: | ------------------------------------------------------------------------ | --------- |
+| `tests_forms.py`         |                          46 |               0 | Integración y funcionales de formularios                                 | Excluido  |
+| `tests_import_export.py` |                          15 |               0 | Integración de importación/exportación de datos                          | Excluido  |
+| `tests_models.py`        |                          32 |               0 | Integración ligera basada en ORM (29) y pruebas cercanas a unitarias (3) | Excluido  |
+| `tests_templatetags.py`  |                   9 activas |               7 | Integración ligera (2)                                                   | Incluido  |
+| `tests_utils.py`         |                           4 |               4 | Ninguna                                                                  | Incluido  |
+| `tests_views.py`         |                          16 |               0 | Integración completa de vistas y rutas                                   | Excluido  |
+total  |122  |11  |  |  | 
 
 ## 3. Estructura del Directorio de Pruebas
 
@@ -115,15 +122,8 @@ Debido a este comportamiento, las pruebas no aíslan una unidad individual de c�
 | `test_temperature`   | Verifica la importación de registros de temperatura.                       |
 | `test_weight`        | Verifica la importación de registros de peso.                              |
 
-### 5.5. Observaciones
 
-Se identificó que la prueba `test_tagged` presenta una complejidad superior al resto del archivo, ya que además de verificar la importación de datos valida la integridad de relaciones *many-to-many* mediante la comprobación de asociaciones específicas entre entidades.
-
-Asimismo, la prueba `test_child_invalid` constituye el único caso orientado a validar escenarios de error y reglas de validación, mientras que las demás pruebas verifican principalmente escenarios exitosos de importación.
-
-El método auxiliar `import_data()` actúa como mecanismo de reutilización para la carga de datos y reducción de duplicación de código, pero no constituye una prueba independiente.
-
-### 5.6. Resultado
+### 5.5. Resultado
 
 **Archivo excluido del inventario de pruebas unitarias.**
 
@@ -182,7 +182,7 @@ El archivo representa el conjunto de pruebas más próximo al nivel unitario ide
 
 ### 6.7. Resultado
 
-**Archivo excluido del inventario de pruebas unitarias puras, aunque identificado como principal candidato para futuras refactorizaciones orientadas a pruebas unitarias.**
+**Archivo excluido del inventario de pruebas unitarias puras, aunque identificado como un buen candidato para futuras refactorizaciones orientadas a pruebas unitarias.**
 
 
 ## 7. Archivo: `tests_templatetags.py`
@@ -372,3 +372,10 @@ Las pruebas del módulo cubren las principales vistas asociadas a las entidades 
 **Archivo excluido del inventario de pruebas unitarias.**
 
 Las 16 pruebas identificadas fueron clasificadas como pruebas de integración completas debido a su dependencia de la infraestructura web, la base de datos y los mecanismos de inicialización de datos utilizados por la aplicación.
+
+
+## 10. Conclusión
+
+Del total de 122 pruebas analizadas, únicamente 11 cumplen los criterios definidos para ser clasificadas como pruebas unitarias puras. Estas pruebas se encuentran concentradas en los archivos `tests_templatetags.py` y `tests_utils.py`, los cuales ejercitan funciones de forma directa y con un alto nivel de aislamiento respecto a la infraestructura de la aplicación.
+
+La mayoría de las pruebas existentes corresponden a pruebas de integración, integración ligera basada en ORM o pruebas funcionales, las cuales validan correctamente distintos componentes del sistema, pero no cumplen con los criterios de aislamiento requeridos para ser consideradas pruebas unitarias puras.
