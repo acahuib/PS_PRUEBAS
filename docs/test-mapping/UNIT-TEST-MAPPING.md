@@ -185,3 +185,79 @@ El archivo representa el conjunto de pruebas más próximo al nivel unitario ide
 **Archivo excluido del inventario de pruebas unitarias puras, aunque identificado como principal candidato para futuras refactorizaciones orientadas a pruebas unitarias.**
 
 
+## 7. Archivo: `tests_templatetags.py`
+
+### 7.1. Resultado del análisis
+
+Se realizó la revisión de las pruebas automatizadas contenidas en el archivo `tests_templatetags.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
+
+A diferencia de los archivos previamente analizados, la mayoría de las pruebas presentes en este módulo ejercitan directamente funciones auxiliares y etiquetas personalizadas de plantilla sin involucrar solicitudes HTTP, vistas, formularios o persistencia de datos.
+
+Como resultado, este archivo constituye la principal fuente de pruebas unitarias identificada hasta el momento dentro del módulo analizado.
+
+### 7.2. Justificación de la clasificación
+
+Las pruebas unitarias identificadas presentan las siguientes características:
+
+* Invocan directamente funciones Python.
+* No utilizan el cliente HTTP de Django.
+* No dependen de vistas o formularios.
+* No requieren interacción con la base de datos.
+* Verifican transformaciones de datos, cálculos y formateo de valores.
+
+Estas características permiten aislar adecuadamente la lógica bajo prueba y reducen significativamente la dependencia de infraestructura externa.
+
+### 7.3. Clasificación identificada
+
+| Tipo de prueba                | Cantidad aproximada | Observaciones                                                                        |
+| ----------------------------- | ------------------- | ------------------------------------------------------------------------------------ |
+| Pruebas unitarias puras       | 7                   | Validan funciones auxiliares y lógica de transformación de datos.                    |
+| Pruebas de integración ligera | 2                   | Requieren interacción con componentes adicionales de Django para generar resultados. |
+| Pruebas inactivas             | 1                   | Prueba comentada y actualmente excluida de la ejecución automática.                  |
+
+### 7.4. Pruebas unitarias identificadas
+
+
+| Método | Clase | Tipo | Estado | Qué verifica | Datos de entrada | Resultado esperado | Resultado obtenido | Tipo de aserción |
+|---|---|---|---|---|---|---|---|---|
+| `test_bootstrap_bool_icon` | `TemplateTagsTestCase` | Unitaria pura | PASS | `bool_icon()` devuelve HTML correcto con clase CSS según booleano | `True`, `False` | `icon-true text-success` / `icon-false text-danger` | Coincide con esperado | `assertEqual` x2 |
+| `test_duration_duration_string` | `TemplateTagsTestCase` | Unitaria pura | PASS | `duration_string()` formatea un `timedelta` en texto legible con precisión variable | `timedelta(h=1, m=30, s=15)`, precisiones `"m"`, `"h"`, `""`, `"not a delta"` | Cadena formateada por precisión; `""` para entrada vacía; `TypeError` para inválido | Coincide con esperado | `assertEqual` x4, `assertRaises` (uso incorrecto) |
+| `test_duration_hours` | `TemplateTagsTestCase` | Unitaria pura | PASS | `hours()` extrae las horas de un `timedelta` | `timedelta(hours=1)`, `""`, `"not a delta"` | `1`, `0`, `TypeError` | Coincide con esperado | `assertEqual` x2, `assertRaises` (uso incorrecto) |
+| `test_duration_minutes` | `TemplateTagsTestCase` | Unitaria pura | PASS | `minutes()` extrae los minutos de un `timedelta` | `timedelta(minutes=45)`, `""`, `"not a delta"` | `45`, `0`, `TypeError` | Coincide con esperado | `assertEqual` x2, `assertRaises` (uso incorrecto) |
+| `test_duration_seconds` | `TemplateTagsTestCase` | Unitaria pura | PASS | `seconds()` extrae los segundos de un `timedelta` | `timedelta(seconds=20)`, `""`, `"not a delta"` | `20`, `0`, `TypeError` | Coincide con esperado | `assertEqual` x2, `assertRaises` (uso incorrecto) |
+| `test_duration_dayssince` | `TemplateTagsTestCase` | Unitaria pura | PASS | `dayssince()` devuelve texto relativo correcto para distintas fechas de referencia | 3 fechas × 5 deltas: mismo día, -5h, -24h, -48h, -60 días | `"today"`, `"yesterday"`, `"2 days ago"`, `"10 days ago"`, `"60 days ago"` | Coincide con esperado | `assertEqual` x15 |
+| `test_duration_deltasince` | `TemplateTagsTestCase` | Unitaria pura | PASS | `deltasince()` calcula el `timedelta` entre dos `datetime` con `now` fijo | 3 pares de `datetime` con `now = 2022-01-01 00:00:02` | `timedelta(s=1)`, `timedelta(s=3)`, `timedelta(days=19326, s=3)` | Coincide con esperado | `assertEqual` dentro de `subTest` x3 |                       |
+
+### 7.5. Pruebas clasificadas como integración ligera
+
+| Método | Clase | Tipo | Estado | Qué verifica | Datos de entrada | Resultado esperado | Resultado obtenido | Tipo de aserción |
+|---|---|---|---|---|---|---|---|---|
+| `test_instance_add_url` | `TemplateTagsTestCase` | Integración ligera | PASS | `instance_add_url()` genera URL correcta con y sin `child` asociado al timer | Timer sin child / Timer con child `Test Child` | `"/sleep/add/?timer=ID"` / `"/sleep/add/?timer=ID&child=slug"` | Coincide con esperado | `assertEqual` x2 |
+| `test_datetime_short` | `TemplateTagsTestCase` | Integración ligera | PASS | `datetime_short()` devuelve `"Today, HH:MM"` para hoy y `"D Mon, HH:MM"` para fechas anteriores | `localtime()` (hoy) / `localtime() - 1 día 6 horas` | Formato `"Today, TIME"` / Formato `"SHORT_MONTH_DAY, TIME"` | Coincide con esperado | `assertEqual` x2 |
+
+### 7.6. Observaciones
+
+Se identificó una prueba comentada e inactiva:
+
+```text
+test_child_age_string
+```
+
+La prueba no participa actualmente en la ejecución automática de la suite y, por tanto, la funcionalidad asociada carece de cobertura activa.
+
+El motivo probable es la dependencia de fechas calculadas respecto al momento actual de ejecución, lo que introduce comportamiento no determinista y posibles fallos intermitentes.
+
+### 7.7. Resultado
+
+**Se identificaron 7 pruebas unitarias puras que cumplen los criterios de inclusión definidos para el presente inventario.**
+
+El archivo constituye la principal fuente de cobertura unitaria encontrada durante el análisis realizado hasta esta etapa.
+
+
+**Unitarias puras:**
+
+
+---
+
+**Integración ligera:**
+
