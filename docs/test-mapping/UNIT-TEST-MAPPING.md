@@ -38,15 +38,15 @@ tests/
 La subcarpeta `import/` fue identificada como parte de la estructura del directorio de pruebas, pero no forma parte del presente análisis debido a que el alcance se limita a los archivos principales de prueba ubicados en la raíz del directorio `tests`.
 
 
-## 3.1 Archivo: `test_forms.py`
+## 4. Archivo: `test_forms.py`
 
-### Resultado del análisis
+### 4.1. Resultado del análisis
 
 Se realizó la revisión de las 46 pruebas automatizadas contenidas en el archivo `test_forms.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
 
 Tras el análisis de su implementación y comportamiento, se determinó que el archivo no contiene pruebas unitarias puras. En consecuencia, ninguna de las pruebas definidas en este archivo forma parte del alcance del presente documento.
 
-### Justificación de la clasificación
+### 4.2. Justificación de la clasificación
 
 Las pruebas analizadas ejercen simultáneamente múltiples componentes de la aplicación, por lo que no aíslan una única unidad de código. Entre las características observadas se encuentran:
 
@@ -57,7 +57,7 @@ Las pruebas analizadas ejercen simultáneamente múltiples componentes de la apl
 
 Debido a estas características, las pruebas se clasifican principalmente como pruebas de integración y pruebas funcionales, en lugar de pruebas unitarias.
 
-### Clasificación identificada
+### 4.3 Clasificación identificada
 
 | Tipo de prueba                      | Cantidad aproximada | Observaciones                                                                          |
 | ----------------------------------- | ------------------- | -------------------------------------------------------------------------------------- |
@@ -66,10 +66,63 @@ Debido a estas características, las pruebas se clasifican principalmente como p
 | Pruebas de validación (integración) | ~4                  | Validación de reglas de negocio a través del flujo completo de la aplicación.          |
 | Pruebas unitarias puras             | 0                   | No se identificaron pruebas que aíslen una unidad individual de código.                |
 
-### Observación
+### 4.4. Observación
 
 Para ser consideradas pruebas unitarias puras, las pruebas deberían ejercitar directamente métodos o funciones específicas de formularios, modelos o utilidades, aislando dependencias externas y evitando el uso del cliente HTTP o de flujos completos de persistencia. No se identificaron pruebas con estas características en el archivo analizado.
 
-### Resultado
+### 4.5. Resultado
+
+**Archivo excluido del inventario de pruebas unitarias.**
+
+
+## 5. Archivo: `tests_import_export.py`
+
+### 5.1. Resultado del análisis
+
+Se realizó la revisión de las 15 pruebas automatizadas contenidas en el archivo `tests_import_export.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
+
+Tras el análisis de su implementación y comportamiento, se determinó que el archivo no contiene pruebas unitarias puras. En consecuencia, ninguna de las pruebas definidas en este archivo forma parte del alcance del presente documento.
+
+### 5.2. Justificación de la clasificación
+
+Las pruebas analizadas validan el proceso completo de importación de datos, involucrando múltiples componentes de la aplicación de manera simultánea. Durante su ejecución se observó la interacción entre archivos de datos, recursos de importación, lógica de validación, modelos y persistencia en base de datos.
+
+De forma general, las pruebas siguen el flujo:
+
+```text
+Archivo CSV → Dataset (tablib) → ImportExportResource → ORM → Base de Datos → Verificación de resultados
+```
+
+Debido a este comportamiento, las pruebas no aíslan una unidad individual de código y, por tanto, no cumplen con los criterios de una prueba unitaria.
+
+### 5.3. Clasificación identificada
+
+| Tipo de prueba          | Cantidad aproximada | Observaciones                                                                         |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------------- |
+| Pruebas de integración  | 15                  | Verifican procesos completos de importación de datos y persistencia en base de datos. |
+| Pruebas unitarias puras | 0                   | No se identificaron pruebas que aíslen funciones, métodos o clases individuales.      |
+
+### 5.4. Casos representativos identificados
+
+| Prueba               | Propósito principal                                                        |
+| -------------------- | -------------------------------------------------------------------------- |
+| `test_bmi`           | Verifica la importación de registros de índice de masa corporal.           |
+| `test_child`         | Verifica la importación de registros de hijos.                             |
+| `test_child_invalid` | Verifica el manejo de errores ante datos inválidos durante la importación. |
+| `test_diaperchange`  | Verifica la importación de cambios de pañal.                               |
+| `test_feeding`       | Verifica la importación de registros de alimentación.                      |
+| `test_sleep`         | Verifica la importación de registros de sueño.                             |
+| `test_temperature`   | Verifica la importación de registros de temperatura.                       |
+| `test_weight`        | Verifica la importación de registros de peso.                              |
+
+### 5.5. Observaciones
+
+Se identificó que la prueba `test_tagged` presenta una complejidad superior al resto del archivo, ya que además de verificar la importación de datos valida la integridad de relaciones *many-to-many* mediante la comprobación de asociaciones específicas entre entidades.
+
+Asimismo, la prueba `test_child_invalid` constituye el único caso orientado a validar escenarios de error y reglas de validación, mientras que las demás pruebas verifican principalmente escenarios exitosos de importación.
+
+El método auxiliar `import_data()` actúa como mecanismo de reutilización para la carga de datos y reducción de duplicación de código, pero no constituye una prueba independiente.
+
+### 5.6. Resultado
 
 **Archivo excluido del inventario de pruebas unitarias.**
