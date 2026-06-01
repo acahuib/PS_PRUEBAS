@@ -59,11 +59,11 @@ Debido a estas características, las pruebas se clasifican principalmente como p
 
 ### 4.3 Clasificación identificada
 
-| Tipo de prueba                      | Cantidad aproximada | Observaciones                                                                          |
+| Tipo de prueba                      | Cantidad | Observaciones                                                                          |
 | ----------------------------------- | ------------------- | -------------------------------------------------------------------------------------- |
-| Pruebas de integración              | ~40                 | Operaciones de creación, edición y eliminación de entidades mediante solicitudes HTTP. |
-| Pruebas funcionales de formularios  | ~6                  | Verificación de comportamiento y precarga de valores en formularios.                   |
-| Pruebas de validación (integración) | ~4                  | Validación de reglas de negocio a través del flujo completo de la aplicación.          |
+| Pruebas de integración              | 40                 | Operaciones de creación, edición y eliminación de entidades mediante solicitudes HTTP. |
+| Pruebas funcionales de formularios  | 6                  | Verificación de comportamiento y precarga de valores en formularios.                   |
+| Pruebas de validación (integración) | 4                  | Validación de reglas de negocio a través del flujo completo de la aplicación.          |
 | Pruebas unitarias puras             | 0                   | No se identificaron pruebas que aíslen una unidad individual de código.                |
 
 ### 4.4. Observación
@@ -97,7 +97,7 @@ Debido a este comportamiento, las pruebas no aíslan una unidad individual de c�
 
 ### 5.3. Clasificación identificada
 
-| Tipo de prueba          | Cantidad aproximada | Observaciones                                                                         |
+| Tipo de prueba          | Cantidad | Observaciones                                                                         |
 | ----------------------- | ------------------- | ------------------------------------------------------------------------------------- |
 | Pruebas de integración  | 15                  | Verifican procesos completos de importación de datos y persistencia en base de datos. |
 | Pruebas unitarias puras | 0                   | No se identificaron pruebas que aíslen funciones, métodos o clases individuales.      |
@@ -126,3 +126,62 @@ El método auxiliar `import_data()` actúa como mecanismo de reutilización para
 ### 5.6. Resultado
 
 **Archivo excluido del inventario de pruebas unitarias.**
+
+
+## 6 Archivo: `tests_models.py`
+
+### 6.1. Resultado del análisis
+
+Se realizó la revisión de las pruebas automatizadas contenidas en el archivo `tests_models.py` con el objetivo de identificar pruebas unitarias que pudieran ser incluidas en el presente inventario.
+
+A diferencia de los archivos previamente analizados, las pruebas de este módulo interactúan directamente con los modelos de dominio y sus métodos, evitando el uso del cliente HTTP, vistas y formularios. Sin embargo, las pruebas continúan utilizando el ORM de Django y la base de datos de prueba para la creación, consulta y modificación de registros.
+
+Debido a esta dependencia de persistencia, no se identificaron pruebas unitarias puras según los criterios establecidos para el presente análisis.
+
+### 6.2. Justificación de la clasificación
+
+Las pruebas ejercitan directamente métodos, propiedades y comportamientos de los modelos, pero mantienen dependencia con la infraestructura de persistencia proporcionada por Django.
+
+Entre las características observadas se encuentran:
+
+* Creación y consulta de registros mediante el ORM.
+* Validación de métodos y propiedades de modelos.
+* Verificación de representaciones textuales (`__str__`).
+* Validación de relaciones entre entidades.
+* Uso de métodos de validación de modelos (`full_clean()`).
+* Dependencia de la base de datos de prueba durante la ejecución.
+
+Por esta razón, las pruebas fueron clasificadas principalmente como pruebas de integración ligera orientadas al modelo.
+
+### 6.3. Clasificación identificada
+
+| Tipo de prueba                      | Cantidad  | Observaciones                                                                     |
+| ----------------------------------- | ------------------- | --------------------------------------------------------------------------------- |
+| Pruebas de integración ligera (ORM) | 29                  | Interactúan directamente con modelos y base de datos sin utilizar la capa web.    |
+| Pruebas cercanas a unitarias        | 3                   | Verifican lógica de negocio específica con mínima dependencia de infraestructura. |
+| Pruebas unitarias puras             | 0                   | No se identificaron pruebas completamente aisladas de la base de datos.           |
+
+### 6.5. Detalle de Pruebas destacadas
+
+Durante el análisis se identificaron tres casos particularmente cercanos al concepto de prueba unitaria:
+
+
+| Método | Clase | Tipo | Estado | Qué verifica | Datos de entrada | Resultado esperado | Resultado obtenido | Tipo de aserción |
+|---|---|---|---|---|---|---|---|---|
+| test_diaperchange_attributes | DiaperChangeTestCase | Casi unitaria | PASS | attributes() devuelve lista de atributos legibles para el usuario | wet=1, solid=1, color="black", amount=1.25 | ["Wet", "Solid", "Black"] ordenado y capitalizado | ["Wet", "Solid", "Black"] | assertListEqual |
+| test_tag_complementary_color | TagTestCase | Casi unitaria | PASS | complementary_color devuelve el color de contraste correcto según luminosidad | Caso 1: color="#ffffff" / Caso 2: color="#000000" | Caso 1: Tag.DARK_COLOR / Caso 2: Tag.LIGHT_COLOR | DARK_COLOR y LIGHT_COLOR respectivamente | assertEqual x2 |
+| test_medication_validation_future_time | MedicationTestCase | Casi unitaria | PASS | full_clean() lanza ValidationError cuando time es futura | time = now() + 1h — objeto en memoria, sin .save() | Se lanza ValidationError antes de persistir | ValidationError lanzado correctamente | assertRaises(ValidationError) |
+
+
+Estas pruebas validan comportamiento del proyeto de forma más directa que el resto del archivo y constituyen los mejores candidatos para una futura refactorización hacia pruebas unitarias puras.
+
+
+### 6.6. Observación
+
+El archivo representa el conjunto de pruebas más próximo al nivel unitario identificado hasta el momento. No obstante, la dependencia sistemática de la base de datos de prueba impide clasificar las pruebas como unitarias puras bajo criterios estrictos de aislamiento.
+
+### 6.7. Resultado
+
+**Archivo excluido del inventario de pruebas unitarias puras, aunque identificado como principal candidato para futuras refactorizaciones orientadas a pruebas unitarias.**
+
+
