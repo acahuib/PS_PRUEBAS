@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from core import utils
 
-
+#El archivo cuenta con pruebas Unitarias.
 class UtilsTestCase(TestCase):
     # Verifica la conversión de un objeto timedelta a una cadena de texto descriptiva.
     # Valida el formato completo, recortes por precisión ('m', 'h') y el manejo de errores de tipo.
