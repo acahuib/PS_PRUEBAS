@@ -12,7 +12,8 @@ from faker import Faker
 
 from core import models
 
-#El archivo esta comppuesto de pruebas de integracion y sistemas
+
+# El archivo esta comppuesto de pruebas de integracion y sistemas
 class FormsTestCaseBase(TestCase):
     c = None
     child = None
