@@ -9,7 +9,8 @@ from faker import Faker
 
 from core import models
 
-#Enfocado en pruebas de integracion y de sistemas
+
+# Enfocado en pruebas de integracion y de sistemas
 class ViewsTestCase(TestCase):
     @classmethod
     def setUpClass(cls):

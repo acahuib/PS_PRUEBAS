@@ -8,7 +8,8 @@ from django.utils import timezone
 
 from core import models
 
-#Esta enfocado en pruebas de integracion
+
+# Esta enfocado en pruebas de integracion
 class BMITestCase(TestCase):
     def setUp(self):
         call_command("migrate", verbosity=0)
