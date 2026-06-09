@@ -2,12 +2,10 @@ import datetime
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from core.forms import ChildForm
-from core.models import Child
 
 
 class TestRF31ChildForm(TestCase):
-
-    def test_FN3_CP_001_valid_happy_path(self):
+    def test_FN3_1_CP_001_creacion_valida(self):
         data = {
             "first_name": "Lucas",
             "last_name": "Perez",
@@ -18,7 +16,7 @@ class TestRF31ChildForm(TestCase):
             form.is_valid(), "El formulario debería ser válido con datos correctos."
         )
 
-    def test_FN3_CP_002_empty_name(self):
+    def test_FN3_CP_002_nombre_vacio(self):
         data = {
             "first_name": "",
             "birth_date": datetime.date.today(),
@@ -29,7 +27,7 @@ class TestRF31ChildForm(TestCase):
         )
         self.assertIn("first_name", form.errors)
 
-    def test_FN3_CP_003_name_exceeds_max_length(self):
+    def test_FN3_CP_003_nombre_excede_limite(self):
         data = {
             "first_name": "A" * 256,
             "birth_date": datetime.date.today(),
@@ -41,7 +39,7 @@ class TestRF31ChildForm(TestCase):
         )
         self.assertIn("first_name", form.errors)
 
-    def test_FN3_CP_004_invalid_date_format(self):
+    def test_FN3_CP_004_formato_fecha_invalido(self):
         data = {
             "first_name": "Lucas",
             "birth_date": "trece de marzo",
@@ -53,7 +51,7 @@ class TestRF31ChildForm(TestCase):
         )
         self.assertIn("birth_date", form.errors)
 
-    def test_FN3_CP_005_future_birth_date(self):
+    def test_FN3_CP_005_fecha_nacimiento_futura(self):
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         data = {
             "first_name": "Lucas",
@@ -67,7 +65,7 @@ class TestRF31ChildForm(TestCase):
         if not form.is_valid():
             self.assertIn("birth_date", form.errors)
 
-    def test_FN3_CP_006_invalid_picture_format(self):
+    def test_FN3_CP_006_formato_imagen_invalido(self):
         invalid_file = SimpleUploadedFile(
             "documento.pdf", b"file_content_fake", content_type="application/pdf"
         )
@@ -83,7 +81,7 @@ class TestRF31ChildForm(TestCase):
         )
         self.assertIn("picture", form.errors)
 
-    def test_FN3_CP_007_old_birth_date(self):
+    def test_FN3_CP_007_fecha_nacimiento_antigua_ilogica(self):
         data = {
             "first_name": "Adulto",
             "birth_date": datetime.date(1970, 1, 1),
@@ -96,7 +94,7 @@ class TestRF31ChildForm(TestCase):
         if not form.is_valid():
             self.assertIn("birth_date", form.errors)
 
-    def test_FN3_CP_008_future_birth_time(self):
+    def test_FN3_CP_008_hora_nacimiento_futura(self):
         now = datetime.datetime.now()
         future_time = (now + datetime.timedelta(hours=2)).time()
 
@@ -113,7 +111,7 @@ class TestRF31ChildForm(TestCase):
         if not form.is_valid():
             self.assertIn("birth_time", form.errors)
 
-    def test_FN3_CP_009_invalid_time_format(self):
+    def test_FN3_CP_009_formato_hora_invalido(self):
         data = {
             "first_name": "Lucas",
             "birth_date": datetime.date.today(),
