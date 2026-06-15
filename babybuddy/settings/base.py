@@ -233,7 +233,7 @@ FORMAT_MODULE_PATH = ["babybuddy.formats"]
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
