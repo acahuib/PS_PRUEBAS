@@ -282,6 +282,20 @@ function test(cb) {
 }
 
 /**
+ * Runs Acceptance (E2E) tests using Playwright and Pytest.
+ *
+ * @param cb
+ */
+function testE2E(cb) {
+  spawn("pipenv", ["run", "pytest", "tests/acceptance/"], {
+    stdio: "inherit",
+  }).on("exit", function (code) {
+    cb();
+    process.exit(code);
+  });
+}
+
+/**
  * Updates glyphs font data from Fontello.
  */
 function updateGlyphs() {
@@ -412,6 +426,8 @@ gulp.task("scripts", scripts);
 gulp.task("styles", styles);
 
 gulp.task("test", test);
+
+gulp.task("test:e2e", testE2E);
 
 gulp.task("updateglyphs", updateGlyphs);
 

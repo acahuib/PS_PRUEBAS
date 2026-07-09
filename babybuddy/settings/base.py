@@ -1,6 +1,7 @@
 import json
 import os
 import dj_database_url
+import sys
 
 from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv, find_dotenv
@@ -406,3 +407,6 @@ BABY_BUDDY = {
 ENABLE_HOME_ASSISTANT_SUPPORT = bool(
     strtobool(os.environ.get("ENABLE_HOME_ASSISTANT_SUPPORT") or "False")
 )
+
+if "test" in sys.argv:
+    AXES_ENABLED = False
