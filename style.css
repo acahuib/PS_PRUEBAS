@@ -307,3 +307,43 @@ footer {
     .hero-actions { flex-direction: column; }
     nav { display: none; }
 }
+/* Estilos para imágenes y figuras */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+}
+
+.figure-container {
+    margin: 20px 0;
+    text-align: center;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+}
+
+.figure-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.mt-20 { margin-top: 20px; }
+.gap-24 { gap: 24px; }
