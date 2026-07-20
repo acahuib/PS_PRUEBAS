@@ -13,9 +13,13 @@
 
     <header class="navbar">
         <div class="container">
-            <span class="logo">BabyBuddy QA</span>
+            <div class="logo-container">
+                <img src="images/escarabajo.jpeg" alt="Logo ESCARABAJO" class="header-logo">
+                <span class="logo">BabyBuddy QA</span>
+            </div>
             <nav>
                 <a href="#resumen">Resumen</a>
+                <a href="#arquitectura">Arquitectura</a>
                 <a href="#metodologia">Metodología</a>
                 <a href="#ejecucion">Pruebas</a>
                 <a href="#no-funcional">Rendimiento</a>
@@ -26,6 +30,7 @@
 
     <section class="hero">
         <div class="container">
+            <span class="badge">Informe IEEE - Aseguramiento de Calidad</span>
             <h1>Diseño y Ejecución de Pruebas Funcionales y No Funcionales para BabyBuddy</h1>
             <p>Validación integral, automatización de pruebas y análisis de resiliencia sobre una plataforma web de cuidado infantil basada en Django.</p>
             <div class="hero-actions">
@@ -37,6 +42,7 @@
 
     <main class="container">
 
+        <!-- Resumen -->
         <section id="resumen" class="card">
             <h2>Resumen del Proyecto</h2>
             <p>El equipo <strong>ESCARABAJO</strong> realizó la evaluación integral de <strong>BabyBuddy</strong>, una plataforma de código abierto para el seguimiento del cuidado infantil. Se implementó una estrategia ágil dividida en sprints, abarcando desde análisis estático y pruebas unitarias hasta pruebas funcionales, de integración, de sistema y de aceptación automatizadas en la nube.</p>
@@ -61,6 +67,18 @@
             </div>
         </section>
 
+        <!-- Arquitectura del Caso de Estudio -->
+        <section id="arquitectura" class="card">
+            <h2>Arquitectura del Caso de Estudio</h2>
+            <p>El sistema se compone de 5 módulos principales desarrollados en Django (Core, Reports, Dashboard, API y BabyBuddy). A continuación se ilustra la arquitectura de la aplicación y su despliegue:</p>
+            
+            <figure class="figure-container">
+                <img src="images/figura1.jpeg" alt="Arquitectura del caso de estudio" class="figure-img">
+                <figcaption>Figura 1: Arquitectura del caso de estudio</figcaption>
+            </figure>
+        </section>
+
+        <!-- Metodología -->
         <section id="metodologia" class="card">
             <h2>Metodología y Cronograma</h2>
             <div class="timeline">
@@ -79,9 +97,32 @@
             </div>
         </section>
 
+        <!-- Cobertura y Resultados de Pruebas -->
         <section id="ejecucion" class="card">
-            <h2>Resultados de Ejecución de Pruebas</h2>
-            <div class="table-responsive">
+            <h2>Resultados y Cobertura de Pruebas</h2>
+            
+            <p>Durante la evaluación funcional y de integración se generaron métricas detalladas para la cobertura de requerimientos y la efectividad de ejecución:</p>
+
+            <div class="grid-2 gap-24">
+                <figure class="figure-container">
+                    <img src="images/figura2.jpeg" alt="Gráfico de cobertura por funcionalidad" class="figure-img">
+                    <figcaption>Figura 2: Gráfico de cobertura por funcionalidad</figcaption>
+                </figure>
+
+                <figure class="figure-container">
+                    <img src="images/figura3.jpeg" alt="Gráfico de cobertura de casos ejecutados" class="figure-img">
+                    <figcaption>Figura 3: Gráfico de cobertura de casos ejecutados</figcaption>
+                </figure>
+            </div>
+
+            <p class="mt-20">En la fase de pruebas de integración para la API REST, se obtuvo un cumplimiento total en todos los endpoints evaluados:</p>
+
+            <figure class="figure-container">
+                <img src="images/figura4.jpeg" alt="Gráfico de casos exitosos y no exitosos en pruebas de integración" class="figure-img">
+                <figcaption>Figura 4: Gráfico de casos exitosos y no exitosos en pruebas de integración</figcaption>
+            </figure>
+
+            <div class="table-responsive mt-20">
                 <table>
                     <thead>
                         <tr>
@@ -126,6 +167,7 @@
             </div>
         </section>
 
+        <!-- Pruebas No Funcionales -->
         <section id="no-funcional" class="card">
             <h2>Pruebas No Funcionales (k6 & Python)</h2>
             <div class="grid-2">
@@ -150,6 +192,7 @@
             </div>
         </section>
 
+        <!-- Equipo -->
         <section id="equipo" class="card">
             <h2>Equipo de Trabajo (ESCARABAJO)</h2>
             <p>Universidad Nacional de San Agustín - Arequipa, Perú</p>
